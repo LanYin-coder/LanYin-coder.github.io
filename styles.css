@@ -59,7 +59,7 @@ button:focus-visible {
   gap: 24px;
   min-height: 72px;
   padding: 14px max(20px, calc((100vw - 1120px) / 2));
-  color: var(--white);
+  color: var(--ink);
   transition:
     background-color 180ms ease,
     color 180ms ease,
@@ -117,37 +117,35 @@ button:focus-visible {
   display: grid;
   align-items: center;
   overflow: hidden;
-  color: var(--white);
+  background:
+    linear-gradient(115deg, rgba(246, 247, 243, 0.96) 0%, rgba(238, 243, 233, 0.98) 50%, rgba(250, 235, 224, 0.94) 100%),
+    linear-gradient(90deg, rgba(31, 111, 95, 0.14), rgba(201, 95, 71, 0.1));
+  color: var(--ink);
   isolation: isolate;
 }
 
-.hero-image,
 .hero-scrim {
   position: absolute;
   inset: 0;
-  z-index: -2;
-}
-
-.hero-image {
-  background:
-    linear-gradient(90deg, rgba(16, 22, 23, 0.86) 0%, rgba(16, 22, 23, 0.58) 44%, rgba(16, 22, 23, 0.1) 74%),
-    url("assets/eason-deng.jpg");
-  background-position: center right 10%;
-  background-size: cover;
-  transform: scale(1.02);
+  z-index: -1;
 }
 
 .hero-scrim {
-  z-index: -1;
   background:
-    linear-gradient(180deg, rgba(8, 12, 12, 0.18) 0%, rgba(8, 12, 12, 0.08) 62%, rgba(246, 247, 243, 0.98) 100%),
-    radial-gradient(circle at 18% 74%, rgba(201, 95, 71, 0.25), transparent 31%),
-    radial-gradient(circle at 42% 16%, rgba(31, 111, 95, 0.22), transparent 28%);
+    linear-gradient(rgba(23, 27, 31, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 27, 31, 0.045) 1px, transparent 1px),
+    linear-gradient(180deg, transparent 0%, rgba(246, 247, 243, 0.9) 92%, var(--paper) 100%);
+  background-size: 42px 42px, 42px 42px, 100% 100%;
+  mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.2) 74%, rgba(0, 0, 0, 0.06));
 }
 
 .hero-content {
   width: var(--content);
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.72fr);
+  gap: clamp(32px, 7vw, 92px);
+  align-items: start;
   padding: 124px 0 96px;
 }
 
@@ -163,7 +161,7 @@ button:focus-visible {
 }
 
 .hero .eyebrow {
-  color: #ffd5c7;
+  color: var(--green);
 }
 
 h1,
@@ -198,7 +196,7 @@ h3 {
 .hero-lede {
   max-width: 670px;
   margin-bottom: 28px;
-  color: rgba(255, 255, 255, 0.88);
+  color: var(--ink-soft);
   font-size: clamp(1.08rem, 1.5vw, 1.28rem);
 }
 
@@ -239,8 +237,8 @@ h3 {
 }
 
 .button-secondary {
-  border-color: rgba(255, 255, 255, 0.46);
-  color: var(--white);
+  border-color: rgba(23, 27, 31, 0.22);
+  color: var(--ink);
 }
 
 .site-header[data-elevated="true"] .button-secondary,
@@ -259,7 +257,7 @@ h3 {
 
 .hero-stats div {
   padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.36);
+  border-top: 1px solid rgba(23, 27, 31, 0.18);
 }
 
 .hero-stats dt {
@@ -270,8 +268,36 @@ h3 {
 
 .hero-stats dd {
   margin: 8px 0 0;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--ink-soft);
   font-size: 0.93rem;
+}
+
+.hero-portrait {
+  width: min(360px, 100%);
+  margin: -18px 0 0;
+  justify-self: end;
+}
+
+.hero-portrait img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border: 1px solid rgba(23, 27, 31, 0.12);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  object-fit: cover;
+  object-position: center top;
+}
+
+.hero-portrait figcaption {
+  margin-top: 14px;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.hero-portrait span {
+  display: block;
+  color: var(--ink);
+  font-weight: 850;
 }
 
 .section,
@@ -564,16 +590,16 @@ h3 {
     min-height: 84svh;
   }
 
-  .hero-image {
-    background:
-      linear-gradient(180deg, rgba(14, 18, 19, 0.64) 0%, rgba(14, 18, 19, 0.8) 58%, rgba(14, 18, 19, 0.9) 100%),
-      url("assets/eason-deng.jpg");
-    background-position: center top;
-    background-size: cover;
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 34px;
+    padding: 96px 0 70px;
   }
 
-  .hero-content {
-    padding: 96px 0 70px;
+  .hero-portrait {
+    width: min(310px, 82vw);
+    justify-self: start;
+    margin-top: 0;
   }
 
   h1 {
@@ -618,6 +644,30 @@ h3 {
   .hero-actions,
   .contact-actions {
     display: grid;
+  }
+
+  .hero-content {
+    position: relative;
+  }
+
+  .hero .eyebrow,
+  .hero h1 {
+    max-width: calc(100% - min(148px, 38vw));
+  }
+
+  .hero-portrait {
+    position: absolute;
+    top: 88px;
+    right: 0;
+    width: min(128px, 34vw);
+  }
+
+  .hero-portrait img {
+    box-shadow: 0 12px 28px rgba(23, 27, 31, 0.16);
+  }
+
+  .hero-portrait figcaption {
+    display: none;
   }
 
   .button {
