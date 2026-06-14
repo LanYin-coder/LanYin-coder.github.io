@@ -20,7 +20,13 @@ This site is intended for the repository:
 LanYin-coder/LanYin-coder.github.io
 ```
 
-Push the `main` branch to GitHub. GitHub Pages will serve it at:
+Create that public repository on GitHub first, then run:
+
+```bash
+./deploy.sh
+```
+
+GitHub Pages will serve it at:
 
 ```text
 https://LanYin-coder.github.io
